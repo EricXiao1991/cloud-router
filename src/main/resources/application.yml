@@ -23,7 +23,7 @@ spring:
         MainDB:
           url: jdbc:mysql://localhost:3306/test1?useUnicode=true&characterEncoding=utf-8&autoReconnect=true
           username: root
-          password: root
+          password: root1234
           driverClassName: com.mysql.jdbc.Driver
           max-active: 500
           initial-size: 10
