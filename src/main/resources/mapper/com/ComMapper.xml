@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="application.csd.dao.interfaces.com.ComDao">
+
+
+
+	<!--  -->
+	<select id="loadUserByKey" parameterType="vo.pojo.PageData"  resultType="vo.pojo.PageData">
+		select
+			id,
+			username,
+			password,
+			xm,
+			xbdm,
+			xbmc,
+			mzdm,
+			mzmc,
+			date_format(csrq,'%Y-%m-%d') csrq,
+			nl,
+			jg,
+			date_format(cjsj,'%Y-%m-%d hh:mm:ss') cjsj,
+			date_format(jlgxsj,'%Y-%m-%d hh:mm:ss') jlgxsj
+		from test_user t
+		where t.username=#{username}
+		and t.password=#{password}
+		limit 1
+	</select>
+
+
+
+	<!--  -->
+	<select id="loadLogDataList" parameterType="vo.pojo.PageData"  resultType="vo.pojo.PageData">
+		select
+		id,
+		user_id,
+		user_username,
+		user_xm,
+		date_format(log_time,'%Y-%m-%d hh:mm:ss') log_time,
+		log_type,
+		log_content,
+		date_format(jlgxsj,'%Y-%m-%d hh:mm:ss') jlgxsj
+		from test_log t
+		where 1=1
+		<if test="log_type !='' and log_type !=null ">
+			and t.log_type = #{log_type}
+		</if>
+		<if test="username !='' and username !=null ">
+			and t.user_username like concat('%',#{username},'%')
+		</if>
+		<if test="xm !='' and xm !=null ">
+			and t.user_xm like concat('%',#{xm},'%')
+		</if>
+		<if test="log_time_begin !='' and log_time_begin !=null ">
+			and t.log_time &gt;=concat(#{log_time_begin},' 00:00:00')
+		</if>
+		<if test="log_time_end !='' and log_time_end !=null ">
+			and t.log_time &lt;=concat(#{log_time_end},' 23:59:59')
+		</if>
+		limit #{start},#{pageSize}
+	</select>
+
+
+	<!--  -->
+	<select id="loadLogDataCount" parameterType="vo.pojo.PageData"  resultType="int">
+		select
+		count(1)
+		from test_log t
+		where 1=1
+		<if test="log_type !='' and log_type !=null ">
+			and t.log_type = #{log_type}
+		</if>
+		<if test="username !='' and username !=null ">
+			and t.user_username like concat('%',#{username},'%')
+		</if>
+		<if test="xm !='' and xm !=null ">
+			and t.user_xm like concat('%',#{xm},'%')
+		</if>
+		<if test="log_time_begin !='' and log_time_begin !=null ">
+			and t.log_time &gt;=concat(#{log_time_begin},' 00:00:00')
+		</if>
+		<if test="log_time_end !='' and log_time_end !=null ">
+			and t.log_time &lt;=concat(#{log_time_end},' 23:59:59')
+		</if>
+	</select>
+
+
+
+
+
+
+
+
+</mapper>
