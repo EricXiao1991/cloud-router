@@ -12,7 +12,7 @@
     <description>我的网关路由</description>
 
     <properties>
-        <mysql.version>5.1.34</mysql.version>
+        <mysql.version>8.0.28</mysql.version>
         <java.version>1.8</java.version>
         <j2cache.version>2.7.6-release</j2cache.version>
         <pool2.version>2.6.1</pool2.version>
